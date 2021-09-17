@@ -24,3 +24,5 @@ hs_err_pid*
 /.flattened-pom.xml
 /target/
 /.idea/
+/docs/bin/codecov.sh
+/docs/bin/deploy.sh
