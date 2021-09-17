@@ -5,7 +5,7 @@
 抽象 javax.servlet.http 包下的类，包括：request、response、cookie、session，用来适配第三方框架，比如：blade、jakarta等
 
 - http 接口：https://gitee.com/fujieid/jap-http
-- http 适配器：https://gitee.com/fujieid/jap-http
+- http 适配器：https://gitee.com/fujieid/jap-http-adapter
 
 ## 快速开始
 
@@ -46,54 +46,4 @@ public class JakartaRequestAdapter implements JapHttpRequest {
 
 ```java
 new JakartaRequestAdapter(HttpServletRequest);
-```
-
-## 快捷使用
-
-### 适配 `jakarta.servlet`
-
-1. 依次引入下方依赖
-
-```xml
-<dependency>
-    <groupId>com.fujieid.jap.http</groupId>
-    <artifactId>jap-http</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-```xml
-<dependency>
-    <groupId>com.fujieid.jap.http</groupId>
-    <artifactId>jap-http-jakarta-adapter</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-2. 在需要适配 `HttpServletRequest` 的地方，替换为
-
-```java
-new JakartaRequestAdapter(HttpServletRequest);
-```
-
-### 适配 `blade` 框架
-
-1. 依次引入下方依赖
-
-```xml
-<dependency>
-    <groupId>com.fujieid.jap.http</groupId>
-    <artifactId>jap-http</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-```xml
-<dependency>
-    <groupId>com.fujieid.jap.http</groupId>
-    <artifactId>jap-http-blade-adapter</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-2. 在需要适配 `HttpRequest` 的地方，替换为
-
-```java
-new BladeRequestAdapter(HttpRequest);
 ```
