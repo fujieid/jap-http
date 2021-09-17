@@ -1,37 +1,99 @@
 # jap-http
 
-#### 介绍
-用来适配 javax.servlet.http 包下的类，包括：request、response、cookie、session
+## 介绍
 
-#### 软件架构
-软件架构说明
+抽象 javax.servlet.http 包下的类，包括：request、response、cookie、session，用来适配第三方框架，比如：blade、jakarta等
 
+- http 接口：https://gitee.com/fujieid/jap-http
+- http 适配器：https://gitee.com/fujieid/jap-http
 
-#### 安装教程
+## 快速开始
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 引入依赖
+```xml
+<dependency>
+    <groupId>com.fujieid.jap.http</groupId>
+    <artifactId>jap-http</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+2. 引入需要适配的第三方框架，此处以 `jakarta.servlet` 为例
+```xml
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>4.0.4</version>
+</dependency>
+```
+3. 实现 `jap-http` 的接口，以 `request` 为例
+```java
+public class JakartaRequestAdapter implements JapHttpRequest {
 
-#### 使用说明
+    private final HttpServletRequest request;
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+    public JakartaRequestAdapter(HttpServletRequest request) {
+        this.request = request;
+    }
 
-#### 参与贡献
+    @Override
+    public String getParameter(String name) {
+        return this.request.getParameter(name);
+    }
+    // ...
+}
+```
+4. 在需要适用 `HttpServletRequest` 的地方，替换为
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+```java
+new JakartaRequestAdapter(HttpServletRequest);
+```
 
+## 快捷使用
 
-#### 特技
+### 适配 `jakarta.servlet`
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1. 依次引入下方依赖
+
+```xml
+<dependency>
+    <groupId>com.fujieid.jap.http</groupId>
+    <artifactId>jap-http</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+```xml
+<dependency>
+    <groupId>com.fujieid.jap.http</groupId>
+    <artifactId>jap-http-jakarta-adapter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+2. 在需要适配 `HttpServletRequest` 的地方，替换为
+
+```java
+new JakartaRequestAdapter(HttpServletRequest);
+```
+
+### 适配 `blade` 框架
+
+1. 依次引入下方依赖
+
+```xml
+<dependency>
+    <groupId>com.fujieid.jap.http</groupId>
+    <artifactId>jap-http</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+```xml
+<dependency>
+    <groupId>com.fujieid.jap.http</groupId>
+    <artifactId>jap-http-blade-adapter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+2. 在需要适配 `HttpRequest` 的地方，替换为
+
+```java
+new BladeRequestAdapter(HttpRequest);
+```
